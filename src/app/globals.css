@@ -153,3 +153,44 @@ html[data-theme="dark"] {
   background-color: #1a1a1a !important; 
   color: #ffffff;
 }
+
+
+
+/* Calendar  */
+
+/* Calendar dark theme */
+/* Calendar custom styles */
+.rbc-calendar {
+  background-color: white;
+}
+
+.dark .rbc-calendar {
+  background-color: #18181b; /* bg-zinc-900 */
+  color: white;
+}
+
+.dark .rbc-time-content > * {
+  border-color: #333;
+}
+
+.dark .rbc-current-time-indicator {
+  background-color: red;
+  height: 2px;
+  z-index: 1000;
+}
+
+.rbc-today {
+  background-color: rgba(255, 255, 0, 0.05) !important;
+}
+
+.dark .rbc-today {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.rbc-event {
+  width: calc(100% + 10px) !important;
+}
+.dark .rbc-today {
+  background-color: rgba(255, 255, 0, 0.12) !important;
+  border-left: 4px solid #eab308 !important;
+}
