@@ -17,7 +17,7 @@ import {
 import { uk } from "date-fns/locale";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Button } from "@/components/ui/button";
-import lessons from "@/data/lessons.json";  
+import lessons from "@/data/lessons.json";
 
 const locales = { uk };
 
@@ -33,13 +33,20 @@ type ColoredEvent = CalendarEvent & {
   color?: string;
 };
 
+type Lesson = {
+  title: string;
+  start: string;
+  end: string;
+  color?: string;
+};
+
 export default function MyCalendar() {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState<ColoredEvent[]>([]);
   const calendarRef = useRef(null);
 
   useEffect(() => {
-    const parsedEvents: ColoredEvent[] = lessons.map((event: any) => ({
+    const parsedEvents: ColoredEvent[] = (lessons as Lesson[]).map((event) => ({
       ...event,
       start: new Date(event.start),
       end: new Date(event.end),
@@ -70,7 +77,6 @@ export default function MyCalendar() {
       </div>
       <Calendar
         toolbar={false}
-
         ref={calendarRef}
         localizer={localizer}
         events={events}
