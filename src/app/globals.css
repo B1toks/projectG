@@ -121,9 +121,35 @@
 }
 
 
-
-
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
+
+
+/* Тємки */
+
+body {
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark body {
+  background-color: black;
+  color: white;
+}
+
+html {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+html[data-theme="light"] {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+html[data-theme="dark"] {
+  background-color: #1a1a1a !important; 
+  color: #ffffff;
+}
