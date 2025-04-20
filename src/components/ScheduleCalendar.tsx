@@ -21,6 +21,13 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Button } from "@/components/ui/button";
 import lessons from "@/data/lessons.json";
 
+interface LessonEvent {
+  title: string;
+  start: string; 
+  end: string;
+  color?: string;
+}
+
 const locales = { uk };
 
 const localizer = dateFnsLocalizer({
@@ -59,7 +66,7 @@ export default function MyCalendar() {
     console.log("Loading lessons...");
 
     const parsedEvents: ColoredEvent[] = lessons
-      .filter((event: any) => {
+      .filter((event: LessonEvent) => {
         const hasAllFields = event.title && event.start && event.end;
         const start = new Date(event.start);
         const end = new Date(event.end);
@@ -70,7 +77,7 @@ export default function MyCalendar() {
 
         return hasAllFields && isAfter(end, start);
       })
-      .map((event: any) => ({
+      .map((event: LessonEvent) => ({
         ...event,
         start: new Date(event.start),
         end: new Date(event.end),
@@ -103,7 +110,7 @@ export default function MyCalendar() {
       </div>
       <div className="h-full overflow-x-auto">
         <Calendar
-          toolbar={true}
+          toolbar={true} 
           ref={calendarRef}
           localizer={localizer}
           events={events}

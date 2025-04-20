@@ -175,7 +175,7 @@ html[data-theme="dark"] {
 
 .dark .rbc-current-time-indicator {
   background-color: red;
-  height: 2px;
+  height: 4px;
   z-index: 1000;
 }
 
