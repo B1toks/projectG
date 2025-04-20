@@ -33,12 +33,10 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (error) {
-      const timer = setTimeout(() => {
-        setError(null);
-      }, 3000);
+      const timer = setTimeout(() => setError(null), 3000);
       return () => clearTimeout(timer);
     }
-  }, [errorTrigger]);
+  }, [error]);
 
   const handleLogin = () => {
     const user = USERS[username as keyof typeof USERS];
