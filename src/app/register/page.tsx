@@ -91,7 +91,7 @@ export default function LoginPage() {
               checked={rememberMe}
               onCheckedChange={(checked) => setRememberMe(Boolean(checked))}
             />
-            <Label htmlFor="remember">Запам'ятати мене</Label>
+            <Label htmlFor="remember">Запам&rsquo;ятати мене</Label>
           </div>
         </CardContent>
 
