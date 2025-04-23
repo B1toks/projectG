@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
-import ErrorMessage from "@/components/ui/ErrorMessage";
+import ErrorMessage from "@/components/ErrorMessage";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -47,7 +47,7 @@ export default function LoginPage() {
       } else {
         localStorage.removeItem("rememberedUser");
       }
-      router.push(`/role/${user.role}`);
+      router.push("/dashboard");
     } else {
       setError("Невірне ім’я користувача або пароль.");
       setErrorTrigger((prev) => prev + 1);

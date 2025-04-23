@@ -8,9 +8,9 @@ export default function DashboardRedirect() {
   const router = useRouter();
 
   useEffect(() => {
-    if (role === "admin") router.push("/Role/admin");
-    else if (role === "teacher") router.push("/Role/teacher");
-    else if (role === "student") router.push("/Role/student");
+    if (role === "admin") router.push("/role/admin");
+    else if (role === "teacher") router.push("/role/teacher");
+    else if (role === "student") router.push("/role/student");
     else router.push("/register"); // якщо ще не залогінився (negadyai)
   }, [role]);
 
