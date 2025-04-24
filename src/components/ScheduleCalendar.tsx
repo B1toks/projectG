@@ -109,7 +109,7 @@ export default function MyCalendar() {
         </div>
       </div>
       <div className="h-full overflow-x-auto">
-        <Calendar
+        <Calendar // nomer kabineta
           toolbar={true} 
           ref={calendarRef}
           localizer={localizer}
@@ -117,7 +117,7 @@ export default function MyCalendar() {
           defaultView={defaultView}
           view={currentView}
           onView={(view) => setCurrentView(view)}
-          views={["day", "week"]}
+          views={["day", "week"]} 
           step={30}
           timeslots={2}
           date={date}

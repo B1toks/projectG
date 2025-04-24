@@ -10,6 +10,7 @@ export interface User {
     senderId: string;
     content: string;
     timestamp: Date;
-    status: 'sent' | 'read'; 
+    status: 'sent' | 'delivered' | 'read';
   };
+
   
