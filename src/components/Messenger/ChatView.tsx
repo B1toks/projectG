@@ -9,7 +9,7 @@ interface Props {
 
 const ChatView: React.FC<Props> = ({ user, messages, onBack }) => {
   return (
-    <div className="absolute inset-0 bg-white dark:bg-[#1c1c1c] p-4 transition-transform transform translate-x-0 z-10">
+    <div className="fixed top-0 bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 p-4 transition-transform transform translate-x-0 z-10">
       <div className="flex items-center mb-4">
         <button onClick={onBack} className="mr-2">←</button>
         <h2 className="text-lg font-bold">{user.fullName}</h2>

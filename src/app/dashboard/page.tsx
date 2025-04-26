@@ -3,16 +3,22 @@ import { useAppSelector } from "@/store/hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+const roleRoutes: Record<string, string> = {
+  admin: "/role/admin",
+  teacher: "/role/teacher",
+  student: "/role/student",
+};
+
 export default function DashboardRedirect() {
   const { role } = useAppSelector((state) => state.auth);
   const router = useRouter();
 
   useEffect(() => {
-    if (role === "admin") router.push("/role/admin");
-    else if (role === "teacher") router.push("/role/teacher");
-    else if (role === "student") router.push("/role/student");
-    else router.push("/register"); // якщо ще не залогінився (negadyai)
-  }, [role]);
+    if (!role) return;
+
+    const destination = roleRoutes[role] || "/register";
+    router.push(destination);
+  }, [role, router]);
 
   return <p>Redirecting...</p>;
 }

@@ -1,37 +1,69 @@
-'use client';
-
 import React, { useState } from 'react';
 
-interface MessageInputProps {
+type Props = {
   onSend: (content: string) => void;
-}
+};
 
-const MessageInput: React.FC<MessageInputProps> = ({ onSend }) => {
-  const [text, setText] = useState('');
+const MessageInput: React.FC<Props> = ({ onSend }) => {
+  const [value, setValue] = useState('');
 
   const handleSend = () => {
-    if (!text.trim()) return;
-    onSend(text);
-    setText('');
+    const trimmed = value.trim();
+    if (trimmed !== '') {
+      onSend(trimmed);
+      setValue('');
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSend();
+    }
   };
 
   return (
-    <div className="flex items-center bg-gray-100 dark:bg-zinc-800 rounded-lg px-3 py-2">
+    <div style={styles.container}>
       <input
         type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
         placeholder="Напишіть повідомлення..."
-        className="flex-1 bg-transparent outline-none text-black dark:text-white"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        style={styles.input}
       />
-      <button
-        onClick={handleSend}
-        className="ml-2 text-blue-600 dark:text-blue-400 font-semibold"
-      >
-        Надіслати
+      <button onClick={handleSend} style={styles.button}>
+        ✈️
       </button>
     </div>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  container: {
+    display: 'flex',
+    borderTop: '1px solid #ddd',
+    padding: '10px',
+    backgroundColor: '#fff',
+  },
+  input: {
+    flexGrow: 1,
+    padding: '8px 12px',
+    fontSize: '16px',
+    borderRadius: '20px',
+    border: '1px solid #ccc',
+    outline: 'none',
+    marginRight: '10px',
+  },
+  button: {
+    padding: '8px 12px',
+    borderRadius: '50%',
+    border: 'none',
+    backgroundColor: '#4C9DD7',
+    color: 'white',
+    fontSize: '18px',
+    cursor: 'pointer',
+  },
 };
 
 export default MessageInput;

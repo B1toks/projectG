@@ -22,9 +22,12 @@ export default function RootLayout({
     <html lang="uk">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-black overflow-hidden`}>
 
-        <Providers>{children}</Providers>
-        <ThemeToggle /> 
-        <Messenger />
+        <Providers>
+          {children}
+          <ThemeToggle /> 
+          <Messenger />
+        </Providers>
+        
       </body>
     </html>
   );
