@@ -3,6 +3,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { User, Message } from '@/types/chat';
 import Image from 'next/image';
+// Додаємо імпорти для роботи з датами
+import { format, isToday, isYesterday, isSameDay } from 'date-fns';
+import { uk } from 'date-fns/locale';
 
 interface Props {
   currentUser: User;
@@ -145,6 +148,99 @@ const ChatWindow: React.FC<Props> = ({
     }
   }, [messageWithDeleteButton]);
 
+  // Функція для форматування дати повідомлень
+  const formatMessageDate = (date: Date) => {
+    if (isToday(date)) {
+      return 'Сьогодні';
+    } else if (isYesterday(date)) {
+      return 'Вчора';
+    } else {
+      return format(date, 'd MMMM yyyy', { locale: uk });
+    }
+  };
+
+  // Функція для рендерингу повідомлень з розділювачами дат
+  const renderMessagesWithDateSeparators = () => {
+    if (messages.length === 0) {
+      return (
+        <div className="text-center text-zinc-500 dark:text-zinc-400 mt-10">
+          Немає повідомлень. Почніть розмову!
+        </div>
+      );
+    }
+
+    let lastMessageDate: Date | null = null;
+    
+    return messages.map((message, index) => {
+      const messageDate = new Date(message.timestamp);
+      const isCurrentUser = message.senderId === currentUser.id;
+      
+      // Перевіряємо, чи потрібно показати дату
+      let showDateSeparator = false;
+      if (!lastMessageDate || !isSameDay(lastMessageDate, messageDate)) {
+        showDateSeparator = true;
+        lastMessageDate = messageDate;
+      }
+      
+      return (
+        <React.Fragment key={message.id}>
+          {showDateSeparator && (
+            <div className="flex justify-center my-4">
+              <div className="px-3 py-1 bg-zinc-200 dark:bg-zinc-700 rounded-full text-xs text-zinc-600 dark:text-zinc-300">
+                {formatMessageDate(messageDate)}
+              </div>
+            </div>
+          )}
+          
+          <div 
+            className={`flex ${isCurrentUser ? 'justify-end' : 'justify-start'} mb-2`}
+            onContextMenu={(e) => handleContextMenu(e, message.id)}
+            onMouseDown={(e) => handleMouseDown(e, message.id)}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={(e) => handleTouchStart(e, message.id)}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div 
+              className={`max-w-[70%] rounded-lg px-4 py-2 ${
+                isCurrentUser 
+                  ? 'bg-blue-500 text-white' 
+                  : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100'
+              } ${
+                longPressActive && selectedMessageId === message.id ? 'opacity-70' : ''
+              } relative`}
+            >
+              <div className="break-words">
+                {message.content}
+                {isCurrentUser && messageWithDeleteButton === message.id && (
+                  <button 
+                    onClick={() => handleDeleteMessage(message.id)}
+                    className="absolute top-1 right-1 w-5 h-5 flex items-center justify-center bg-red-500 rounded-full text-white text-xs"
+                    aria-label="Видалити повідомлення"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+              <div className="text-xs mt-1 flex justify-end gap-1">
+                <span className={`${isCurrentUser ? 'text-blue-100' : 'text-zinc-500 dark:text-zinc-400'}`}>
+                  {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+                {isCurrentUser && (
+                  <span>
+                    {message.status === 'sent' && '✓'}
+                    {message.status === 'delivered' && '✓✓'}
+                    {message.status === 'read' && '✓✓'}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </React.Fragment>
+      );
+    });
+  };
+
   return (
     <div className="flex flex-col h-full relative">
       <div className="flex items-center p-4 bg-zinc-200 dark:bg-zinc-800 border-b border-zinc-300 dark:border-zinc-700">
@@ -178,66 +274,9 @@ const ChatWindow: React.FC<Props> = ({
 
       <div 
         ref={messageContainerRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4"
+        className="flex-1 overflow-y-auto p-4 space-y-2"
       >
-        {messages.length === 0 ? (
-          <div className="text-center text-zinc-500 dark:text-zinc-400 mt-10">
-            Немає повідомлень. Почніть розмову!
-          </div>
-        ) : (
-          messages.map((message) => {
-            const isCurrentUser = message.senderId === currentUser.id;
-            
-            return (
-              <div 
-                key={message.id}
-                className={`flex ${isCurrentUser ? 'justify-end' : 'justify-start'}`}
-                onContextMenu={(e) => handleContextMenu(e, message.id)}
-                onMouseDown={(e) => handleMouseDown(e, message.id)}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}
-                onTouchStart={(e) => handleTouchStart(e, message.id)}
-                onTouchEnd={handleTouchEnd}
-              >
-                <div 
-                  className={`max-w-[70%] rounded-lg px-4 py-2 ${
-                    isCurrentUser 
-                      ? 'bg-blue-500 text-white' 
-                      : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100'
-                  } ${
-                    longPressActive && selectedMessageId === message.id ? 'opacity-70' : ''
-                  } relative`}
-                >
-                  <div className="break-words">
-                    {message.content}
-                    {/* Кнопка видалення з'являється тільки при тривалому натисканні */}
-                    {isCurrentUser && messageWithDeleteButton === message.id && (
-                      <button 
-                        onClick={() => handleDeleteMessage(message.id)}
-                        className="absolute top-1 right-1 w-5 h-5 flex items-center justify-center bg-red-500 rounded-full text-white text-xs"
-                        aria-label="Видалити повідомлення"
-                      >
-                        ×
-                      </button>
-                    )}
-                  </div>
-                  <div className="text-xs mt-1 flex justify-end gap-1">
-                    <span className={`${isCurrentUser ? 'text-blue-100' : 'text-zinc-500 dark:text-zinc-400'}`}>
-                      {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </span>
-                    {isCurrentUser && (
-                      <span>
-                        {message.status === 'sent' && '✓'}
-                        {message.status === 'delivered' && '✓✓'}
-                        {message.status === 'read' && '✓✓'}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })
-        )}
+        {renderMessagesWithDateSeparators()}
       </div>
 
       <form className="p-4 bg-zinc-100 dark:bg-zinc-800 border-t border-zinc-300 dark:border-zinc-700" onSubmit={handleSubmit}>

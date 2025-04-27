@@ -10,21 +10,25 @@ const roleRoutes: Record<string, string> = {
 };
 
 export default function DashboardRedirect() {
-  const { role, isAuthenticated } = useAppSelector((state) => state.auth);
+  const auth = useAppSelector((state) => state.auth);
+  const role = auth?.role || '';
+  const isAuthenticated = auth?.isAuthenticated || false;
+  
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/login"); 
-      return;
-    }
+    if (typeof window !== 'undefined') {
+      if (!isAuthenticated) {
+        router.push("/login"); 
+        return;
+      }
 
-    if (!role) {
-      return; 
+      if (role && roleRoutes[role]) {
+        router.push(roleRoutes[role]);
+      } else {
+        router.push("/register");
+      }
     }
-
-    const destination = roleRoutes[role] || "/register";
-    router.push(destination);
   }, [role, isAuthenticated, router]);
 
   return <p>Redirecting...</p>;
