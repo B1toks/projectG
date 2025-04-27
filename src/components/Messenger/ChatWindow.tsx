@@ -171,7 +171,7 @@ const ChatWindow: React.FC<Props> = ({
 
     let lastMessageDate: Date | null = null;
     
-    return messages.map((message, index) => {
+    return messages.map((message) => {
       const messageDate = new Date(message.timestamp);
       const isCurrentUser = message.senderId === currentUser.id;
       
