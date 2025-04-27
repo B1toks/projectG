@@ -1,3 +1,7 @@
+export default function Profile() {
+  return <h1>Панель Profile</h1>;
+}
+
 // 'use client';
 
 // import React, { useState } from 'react';
