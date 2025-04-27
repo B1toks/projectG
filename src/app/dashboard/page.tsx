@@ -10,15 +10,22 @@ const roleRoutes: Record<string, string> = {
 };
 
 export default function DashboardRedirect() {
-  const { role } = useAppSelector((state) => state.auth);
+  const { role, isAuthenticated } = useAppSelector((state) => state.auth);
   const router = useRouter();
 
   useEffect(() => {
-    if (!role) return;
+    if (!isAuthenticated) {
+      router.push("/login"); 
+      return;
+    }
+
+    if (!role) {
+      return; 
+    }
 
     const destination = roleRoutes[role] || "/register";
     router.push(destination);
-  }, [role, router]);
+  }, [role, isAuthenticated, router]);
 
   return <p>Redirecting...</p>;
 }
