@@ -17,6 +17,6 @@ export interface Message {
     messageId?: string;
     isActive?: boolean;
     deleted?: boolean;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }

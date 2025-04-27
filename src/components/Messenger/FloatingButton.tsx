@@ -8,22 +8,10 @@ interface FloatingButtonProps {
 }
 
 export default function FloatingButton({ onClick, unreadCount = 0 }: FloatingButtonProps) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  
-  useEffect(() => {
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(darkModeMediaQuery.matches);
-    
-    const handleChange = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
-    darkModeMediaQuery.addEventListener('change', handleChange);
-    
-    return () => darkModeMediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
   return (
     <button
       onClick={onClick}
-      className={`fixed bottom-4 right-4 z-40 bg-zinc-900 dark:bg-white text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300`}
+      className="fixed bottom-4 right-4 z-40 bg-zinc-900 dark:bg-white text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300"
     >
       <span className="text-xl">💬</span>
       {unreadCount > 0 && (
