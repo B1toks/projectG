@@ -296,3 +296,62 @@ html[data-theme="dark"] {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
 }
+
+/* прогрес */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Scrollbar стилі */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+.scrollbar-thumb-zinc-800 {
+  scrollbar-color: #27272a transparent;
+}
+
+.event-dot-homework::after,
+.event-dot-test::after,
+.event-dot-exam::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.event-dot-homework::after {
+  background-color: #a3a3a3; /* або theme("colors.neutral.400") */
+}
+
+.event-dot-test::after {
+  background-color: #3b82f6; /* blue-500 */
+}
+
+.event-dot-exam::after {
+  background-color: #ef4444; /* red-500 */
+}
+
+/* Розтягує календарну сітку */
+.rdp {
+  --rdp-cell-size: 3.5rem; /* Збільш клітинки */
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.rdp-table {
+  width: 100%;
+  table-layout: fixed; /* рівномірний розподіл */
+}
