@@ -3,16 +3,16 @@
 import { useState } from 'react';
 import { CourseTabs } from '../../../components/courses/CourseTabs';
 import { CourseOverview } from '../../../components/courses/CourseOverview';
-import TasksTab  from '../../../components/courses/TasksTab';
-import  NewsTab  from '../../../components/courses//NewsTab';
+import TasksTab from '../../../components/courses/TasksTab';
+import NewsTab from '../../../components/courses/NewsTab';
+import JournalTab from '../../../components/courses/JournalTab';
 import type { Role } from '@/types';
 
 export default function CoursePage() {
-  const [tab, setTab] = useState<'overview' | 'tasks' | 'news'>('overview');
+  const [tab, setTab] = useState<'overview' | 'tasks' | 'news' | 'journal'>('overview');
 
-  // тимчасово хардкод
   const user = {
-    role: 'teacher' as Role, // або 'teacher'
+    role: 'teacher' as Role, // або 'student'
   };
 
   return (
@@ -23,6 +23,7 @@ export default function CoursePage() {
       {tab === 'overview' && <CourseOverview role={user.role} />}
       {tab === 'tasks' && <TasksTab />}
       {tab === 'news' && <NewsTab />}
+      {tab === 'journal' && <JournalTab role={user.role} />}
     </div>
   );
 }

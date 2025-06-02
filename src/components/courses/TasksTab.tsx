@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Pencil, Trash } from "lucide-react";
 import { Role } from "@/types";
+import Link from 'next/link'
 
 const user: { role: Role } = {
   role: "student", // 'student'  'teacher'
@@ -25,10 +26,10 @@ const TasksTab = () => {
   const isTeacher = user.role === "teacher";
 
   return (
-    <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-6 dark:bg-zinc-900">
+    <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-6 ">
       <div className="lg:col-span-2 space-y-4">
-        <Card>
-          <CardHeader className="flex justify-between items-center">
+        <Card className= "dark:bg-zinc-900">
+          <CardHeader className="flex justify-between items-center ">
             <CardTitle>Завдання</CardTitle>
             {!isTeacher && (
               <span className="text-muted-foreground">15/30</span>
@@ -38,17 +39,19 @@ const TasksTab = () => {
             <Accordion type="single" collapsible className="space-y-2">
               {[1, 2, 3].map((t) => (
                 <AccordionItem key={t} value={`theme-${t}`}>
-                  <AccordionTrigger>
-                    Тема {t}: Назва
-                    {isTeacher && (
-                      <div className="ml-auto flex gap-2">
-                        <Pencil className="w-4 h-4 cursor-pointer" />
-                        <Trash className="w-4 h-4 cursor-pointer" />
-                      </div>
-                    )}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    {!isTeacher ? (
+                <AccordionTrigger>
+                  Тема {t}: Назва
+                  {isTeacher && (
+                    <div className="ml-auto flex gap-2">
+                      <Pencil className="w-4 h-4 cursor-pointer" />
+                      <Trash className="w-4 h-4 cursor-pointer" />
+                    </div>
+                  )}
+                </AccordionTrigger>
+                
+                <AccordionContent>
+                  
+                  {!isTeacher ? (
                       <ul className="space-y-1">
                         <li className="flex justify-between">
                           <div className="flex items-center gap-2">
@@ -69,38 +72,31 @@ const TasksTab = () => {
                           <span className="text-sm">24 питання</span>
                         </li>
                       </ul>
-                    ) : (
-                      <Button size="sm" variant="outline">
-                        Додати матеріал
+                    ) :  (
+                    <Button size="sm" variant="outline" className="mt-2">
+                      Додати матеріал
+                    </Button>
+                  )}
+                  <div className="flex justify-end mt-2">
+                    <Link href={`/courses/ux-ui-design-1/topic/${t}`}>
+                      <Button variant="outline" className="text-sm">
+                        Переглянути
                       </Button>
-                    )}
-                  </AccordionContent>
-                </AccordionItem>
+                    </Link>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              
               ))}
             </Accordion>
           </CardContent>
         </Card>
 
-        {isTeacher && (
-          <div className="space-y-2">
-            {[
-              "Теоретичні відомості",
-              "Практичні та індивідуальні завдання",
-              "Контроль",
-            ].map((block) => (
-              <Card key={block}>
-                <CardHeader className="flex justify-between">
-                  <CardTitle>{block}</CardTitle>
-                  <Pencil className="w-4 h-4 cursor-pointer" />
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        )}
+        
       </div>
 
       {!isTeacher && (
-        <Card>
+        <Card className= "dark:bg-zinc-900">
           <CardContent className="pt-6 space-y-4">
             <div className="text-center relative h-32 w-full">
               <svg viewBox="0 0 100 50" className="w-full h-full">

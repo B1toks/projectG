@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import ThemeToggle from "@/components/ThemeToggle";
-import Messenger from '@/components/Messenger/MessengerApp'; 
+import Messenger from "@/components/Messenger/MessengerApp";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 
@@ -23,7 +23,14 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-black`}
+        className={`
+          ${geistSans.variable} 
+          ${geistMono.variable} 
+          antialiased 
+          bg-white text-gray-900 
+          dark:bg-black dark:text-white 
+          transition-all duration-300 ease-in-out
+        `}
       >
         <Providers>
           <div className="flex min-h-screen">
@@ -32,7 +39,7 @@ export default function RootLayout({
             <div className="flex flex-col flex-1 overflow-hidden">
               <Topbar />
 
-              <main className="flex-1 overflow-y-auto p-6 bg-white dark:bg-black">
+              <main className="flex-1 overflow-y-auto p-6 animate-fade-in">
                 {children}
               </main>
             </div>

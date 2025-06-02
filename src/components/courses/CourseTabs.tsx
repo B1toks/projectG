@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button";
 
 interface Props {
-  activeTab: 'overview' | 'tasks' | 'news';
-  onTabChange: (tab: 'overview' | 'tasks' | 'news') => void;
+  activeTab: 'overview' | 'tasks' | 'news' | 'journal';
+  onTabChange: (tab: 'overview' | 'tasks' | 'news' | 'journal' ) => void;
 }
 
 export const CourseTabs: React.FC<Props> = ({ activeTab, onTabChange }) => {
@@ -18,6 +18,12 @@ export const CourseTabs: React.FC<Props> = ({ activeTab, onTabChange }) => {
       </Button>
       <Button variant={activeTab === 'news' ? 'default' : 'outline'} onClick={() => onTabChange('news')}>
         Новини
+      </Button>
+      <Button
+        variant={activeTab === 'journal' ? 'default' : 'outline'}
+        onClick={() => onTabChange('journal')}
+      >
+        Журнал
       </Button>
     </div>
   );

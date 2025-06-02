@@ -15,7 +15,7 @@ export const CourseOverview: React.FC<Props> = ({ role }) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2 space-y-4">
-        <Card>
+        <Card className= "dark:bg-zinc-900">
           <CardContent className="p-4 space-x-2 flex flex-wrap items-center text-sm text-muted-foreground">
             <span>25 тем</span>
             <span>•</span>
@@ -29,10 +29,10 @@ export const CourseOverview: React.FC<Props> = ({ role }) => {
 
         <Accordion type="multiple" className="w-full">
           <AccordionItem value="syllabus">
-            <AccordionTrigger>Силабус</AccordionTrigger>
+            <AccordionTrigger >Силабус</AccordionTrigger>
             <AccordionContent>
               {[1, 2, 3].map((n) => (
-                <Card key={n} className="mb-2">
+                <Card key={n} className="mb-2 dark:bg-zinc-900">
                   <CardContent className="p-4">Посилання. Тема {n}</CardContent>
                 </Card>
               ))}
@@ -57,7 +57,7 @@ export const CourseOverview: React.FC<Props> = ({ role }) => {
       </div>
 
       <div className="space-y-4">
-        <Card>
+        <Card className= "dark:bg-zinc-900">
           <CardContent className="p-4 flex flex-col items-center">
             <div className="w-24 h-24 bg-gray-200 rounded-full mb-4" />
             <p className="font-semibold">Вакуленко О. В.</p>
@@ -70,7 +70,7 @@ export const CourseOverview: React.FC<Props> = ({ role }) => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className= "dark:bg-zinc-900">
           <CardContent className="p-4 text-sm">
             <h3 className="font-semibold mb-2">Консультації</h3>
             <div>Офлайн: кожна п’ятниця, ауд. М210</div>

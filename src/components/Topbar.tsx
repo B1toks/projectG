@@ -1,10 +1,23 @@
+// components/topbar.tsx
+"use client";
+
+import { Bell, UserCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 const Topbar = () => {
-    return (
-      <header className="w-full h-12 bg-gray-200 flex items-center px-4 shadow">
-        <h1 className="text-lg font-semibold dark:text-black">LMS</h1>
-      </header>
-    );
-  };
-  
-  export default Topbar;
-  
+  return (
+    <header className="w-full h-16 flex justify-between items-center px-6 bg-white dark:bg-zinc-900 border-b shadow-sm">
+      <h1 className="text-xl font-bold text-blue-600">MIGHT</h1>
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" className="hover:bg-blue-100 dark:hover:bg-zinc-800 p-2 rounded-full">
+          <Bell className="text-blue-600" />
+        </Button>
+        <Button variant="ghost" className="hover:bg-blue-100 dark:hover:bg-zinc-800 p-2 rounded-full">
+          <UserCircle className="text-blue-600" />
+        </Button>
+      </div>
+    </header>
+  );
+};
+
+export default Topbar;

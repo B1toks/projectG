@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import ScheduleCalendar from '@/components/ScheduleCalendar'
+import PageWrapper from "@/components/PageWrapper";
 
 function getTimeLeft(endDate: Date) {
   const now = new Date()
@@ -34,7 +35,8 @@ export default function MainPage() {
   const progress = 1 - timeLeft.totalSeconds / timeLeft.totalDuration
 
   return (
-    <div className="flex flex-col p-6 gap-6 bg-background">
+    <PageWrapper>
+      <div className="flex flex-col p-6 gap-6 bg-background">
       <div className="flex flex-col md:flex-row gap-6">
         <Card className="md:w-1/3 bg-zinc-100 dark:bg-zinc-900">
           <CardHeader>
@@ -75,7 +77,8 @@ export default function MainPage() {
               <CardHeader className="flex flex-row justify-between items-center ">
                 
                 <CardTitle className="text-lg">Мої курси</CardTitle>
-                <Link href="/my-courses">
+                <Link href="/courses">
+                  
                   <Button variant="outline" className="text-sm">
                     Переглянути <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
@@ -125,5 +128,7 @@ export default function MainPage() {
         </CardContent>
       </Card>
     </div>
+    </PageWrapper>
+    
   )
 }

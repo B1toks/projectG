@@ -12,6 +12,10 @@ import { Card } from "@/components/ui/card"
 import { ArrowLeft, UploadCloud } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import clsx from "clsx"
+import { useRouter } from "next/navigation"
+
+
+
 
 export default function TopicPage({ isTeacher = false }: { isTeacher?: boolean }) {
   const [commentEnabled, setCommentEnabled] = useState(true)
@@ -19,6 +23,8 @@ export default function TopicPage({ isTeacher = false }: { isTeacher?: boolean }
   const [activeTab, setActiveTab] = useState("materials")
   const [activeTopic, setActiveTopic] = useState("Тема 4: Назва")
   const [markedAsDone, setMarkedAsDone] = useState(false)
+
+
 
   const [isEditing, setIsEditing] = useState(false)
   const [materials, setMaterials] = useState([
@@ -70,14 +76,16 @@ export default function TopicPage({ isTeacher = false }: { isTeacher?: boolean }
   const handleClickDropzone = () => {
     fileInputRef.current?.click()
   }
-  
+
+  const router = useRouter();
+
   return (
-    <div className="flex flex-col bg-white dark:bg-zinc-900 min-h-screen pl-20 pt-12">
+    <div className="flex flex-col  min-h-screen pl-20 pt-12">
       <div className="px-4 pt-2 pb-4">
         <h2 className="text-2xl font-bold text-black dark:text-white">{activeTopic}</h2>
       </div>
       <div className="flex items-center gap-2 px-4 pb-4">
-        <Button size="icon" variant="ghost">
+        <Button size="icon" variant="ghost"  onClick={() => router.back()}>
           <ArrowLeft className="h-5 w-5" />
         </Button>
         {statuses.map((status) => (
@@ -94,7 +102,7 @@ export default function TopicPage({ isTeacher = false }: { isTeacher?: boolean }
 
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
         <div className="lg:w-64 w-full pr-4 lg:pr-4 px-4 lg:px-0">
-          <Card className="w-full p-2 dark:bg-zinc-800">
+          <Card className="w-full p-2 dark:bg-zinc-900">
             <ScrollArea className="h-full">
               <div className="space-y-2">
                 {[...Array(11)].map((_, i) => {
@@ -171,7 +179,7 @@ export default function TopicPage({ isTeacher = false }: { isTeacher?: boolean }
                     <select
                       value={newMaterial.type}
                       onChange={(e) => setNewMaterial({ ...newMaterial, type: e.target.value as "file" | "video" })}
-                      className="bg-zinc-100 dark:bg-zinc-800 p-2 rounded w-full text-black dark:text-white"
+                      className="bg-zinc-100 dark:bg-zinc-900 p-2 rounded w-full text-black dark:text-white"
                     >
                       <option value="file">Файл</option>
                       <option value="video">Відео</option>
@@ -182,7 +190,7 @@ export default function TopicPage({ isTeacher = false }: { isTeacher?: boolean }
                       value={newMaterial.name}
                       onChange={(e) => setNewMaterial({ ...newMaterial, name: e.target.value })}
                       placeholder="Назва матеріалу"
-                      className="bg-zinc-100 dark:bg-zinc-800 text-black dark:text-white"
+                      className="bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white"
                     />
 
                     <Button onClick={handleAddMaterial}>Додати</Button>

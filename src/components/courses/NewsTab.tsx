@@ -8,17 +8,17 @@ import { Switch } from "@/components/ui/switch";
 import { Role } from "@/types";
 
 const user: { role: Role } = {
-  role: "student", //  'student'  'teacher'
+  role: "teacher", //  'student'  'teacher'
 };
 
 const NewsTab = () => {
   const isTeacher = user.role === "teacher";
 
   return (
-    <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-6 dark:bg-zinc-900">
+    <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-6 ">
       <div className="lg:col-span-2 space-y-4">
         {isTeacher && (
-          <Card>
+          <Card className= "dark:bg-zinc-900" >
             <CardHeader>
               <Textarea placeholder="Створити тред..." />
               <div className="flex justify-between items-center pt-2">
@@ -30,7 +30,7 @@ const NewsTab = () => {
         )}
 
         {[1, 2].map((i) => (
-          <Card key={i}>
+          <Card className= "dark:bg-zinc-900" key={i}>
             <CardHeader>
               <CardTitle>Перенесення лекції</CardTitle>
             </CardHeader>
@@ -51,7 +51,7 @@ const NewsTab = () => {
       </div>
 
       <div className="space-y-4">
-        <Card>
+        <Card className= "dark:bg-zinc-900">
           <CardContent className="pt-4 text-center">
             <Avatar className="w-20 h-20 mx-auto">
               <AvatarImage src="/placeholder.png" />
@@ -67,7 +67,7 @@ const NewsTab = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className= "dark:bg-zinc-900">
           <CardHeader>
             <CardTitle>Консультації</CardTitle>
           </CardHeader>
