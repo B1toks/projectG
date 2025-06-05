@@ -35,7 +35,6 @@ const events = [
 ];
 
 const getDaysInMonth = () => {
-  const today = new Date();
   const year = 2025;
   const month = 5; // June (0-indexed)
   const firstDay = new Date(year, month, 1).getDay();
