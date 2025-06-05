@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useCallback } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { MaterialCard } from "@/components/tasks/MaterialCard"
 import { Textarea } from "@/components/ui/textarea"
@@ -18,8 +18,8 @@ import { useRouter } from "next/navigation"
 
 
 export default function TopicPage({ isTeacher = false }: { isTeacher?: boolean }) {
-  const [commentEnabled, setCommentEnabled] = useState(true)
-  const [fileUploadEnabled, setFileUploadEnabled] = useState(true)
+  // const [commentEnabled, setCommentEnabled] = useState(true)
+  // const [fileUploadEnabled, setFileUploadEnabled] = useState(true)
   const [activeTab, setActiveTab] = useState("materials")
   const [activeTopic, setActiveTopic] = useState("Тема 4: Назва")
   const [markedAsDone, setMarkedAsDone] = useState(false)
