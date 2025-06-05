@@ -73,21 +73,6 @@ type GradeEntry = {
 type GradesState = Record<number, Record<number, GradeEntry>>;
 
 export default function JournalTab({ role }: JournalTabProps) {
-  // Якщо роль студента, показуємо повідомлення про недоступність
-  if (role === 'student') {
-    return (
-      <div className="p-8 bg-white dark:bg-zinc-900 text-gray-900 dark:text-white rounded-xl border dark:border-white/20">
-        <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-          <div className="text-6xl mb-4">📚</div>
-          <h2 className="text-2xl font-semibold mb-2">Журнал недоступний</h2>
-          <p className="text-gray-600 dark:text-zinc-400 max-w-md">
-            Журнал з оцінками та відвідуваністю доступний тільки для викладачів та адміністраторів.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   const [activeSubTab, setActiveSubTab] = useState<'grades' | 'attendance' | 'students'>('grades');
   const [editMode, setEditMode] = useState<Record<'grades' | 'attendance', boolean>>({
     grades: false,
@@ -119,6 +104,21 @@ export default function JournalTab({ role }: JournalTabProps) {
     });
     return initial;
   });
+
+  // Якщо роль студента, показуємо повідомлення про недоступність
+  if (role === 'student') {
+    return (
+      <div className="p-8 bg-white dark:bg-zinc-900 text-gray-900 dark:text-white rounded-xl border dark:border-white/20">
+        <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
+          <div className="text-6xl mb-4">📚</div>
+          <h2 className="text-2xl font-semibold mb-2">Журнал недоступний</h2>
+          <p className="text-gray-600 dark:text-zinc-400 max-w-md">
+            Журнал з оцінками та відвідуваністю доступний тільки для викладачів та адміністраторів.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const isInEditMode = editMode.grades || editMode.attendance;
 
