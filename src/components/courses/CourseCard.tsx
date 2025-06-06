@@ -32,7 +32,7 @@ export default function CourseCard({
   progress,
 }: CourseCardProps) {
   return (
-    <Card>
+    <Card className="dark:bg-zinc-900">
       <CardHeader>
         <CardTitle className="text-lg">
           {title}

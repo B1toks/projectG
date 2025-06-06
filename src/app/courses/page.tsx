@@ -41,8 +41,8 @@ export default function MyCoursesPage() {
       <h1 className="text-2xl font-semibold">Мої курси</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {courses.map((course, idx) => (
-           <Link key={idx} href={`/courses/${course.id}`} className="block">    
-            <CourseCard
+           <Link key={idx} href={`/courses/${course.id}`} className="block" >    
+            <CourseCard 
               role={user.role as "student" | "teacher"} 
               title={course.title}
               teacher={user.role === "student" ? course.teacher : undefined}

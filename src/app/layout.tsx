@@ -34,8 +34,10 @@ export default function RootLayout({
       >
         <Providers>
           <div className="flex min-h-screen">
-            <Sidebar />
+            <div className="flex min-h-screen">
 
+              <Sidebar />
+            </div>
             <div className="flex flex-col flex-1 overflow-hidden">
               <Topbar />
 
