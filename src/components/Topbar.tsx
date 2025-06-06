@@ -1,8 +1,9 @@
 "use client";
 
-import { Bell, UserCircle } from "lucide-react";
+import { UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { NotificationBell } from '@/components/NotificationBell';
 
 const Topbar = () => {
   return (
@@ -10,9 +11,9 @@ const Topbar = () => {
       <Link href="/main">
       <h1 className="text-xl font-bold text-blue-600">MIGHT</h1>
       </Link>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 pr-14">
         <Button variant="ghost" className="hover:bg-blue-100 dark:hover:bg-zinc-800 p-2 rounded-full">
-          <Bell className="text-blue-600" />
+          <NotificationBell />
         </Button>
         <Button variant="ghost" className="hover:bg-blue-100 dark:hover:bg-zinc-800 p-2 rounded-full">
           <UserCircle className="text-blue-600" />
